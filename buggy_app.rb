@@ -5,10 +5,14 @@ require 'bundler/setup'
 
 require "json"
 require "faker"
+require "time"
 
-def error_payload
+LOG_FILE = "bugsnag.log"
+SLEEP_PERIOD = 1..2000
+
+def generate_error_payload(api_key)
   JSON.generate({
-    api_key: "4a6a484e14e18cccd6effde6db6e297e",
+    api_key: api_key,
     notifier: {
       name: "Bugsnag Ruby",
       version: "0.0.1",
@@ -40,7 +44,16 @@ def error_payload
   })
 end
 
-while true do
-  File.open("bugsnag.log", "a") { |file| file.write "#{error_payload}\n" }
-  sleep 1
+def crash_repeatedly(api_key)
+  while true do
+    puts "#{Time.now.utc.iso8601(3)} - Writing error payload to #{LOG_FILE}"
+    File.open(LOG_FILE, "a") { |file| file.write "#{generate_error_payload(api_key)}\n" }
+    sleep rand(SLEEP_PERIOD)/1000.0
+  end
+end
+
+if ARGV.length == 1
+  crash_repeatedly(ARGV.first)
+else
+  puts "Usage: ./buggy_app.rb [bugsnag-api-key]"
 end
