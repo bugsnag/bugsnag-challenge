@@ -12,7 +12,7 @@ SLEEP_PERIOD = 1..2000
 
 def generate_error_payload(api_key)
   JSON.generate({
-    :api_key => api_key,
+    :apiKey => api_key,
     :notifier => {
       :name => "Bugsnag Ruby",
       :version => "0.0.1",
