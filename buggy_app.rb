@@ -48,15 +48,22 @@ def crash_repeatedly(api_key)
   while true do
     puts "#{Time.now.utc.iso8601(3)} - Writing error payload to #{LOG_FILE}"
 
-    File.open(LOG_FILE, "a") do |file|
-      payload = "#{generate_error_payload(api_key)}\n"
-      payload = payload[0..rand(50..400)] + "\n" if rand(0..20) == 0
+    file ||= File.open(LOG_FILE, "a")
+    payload = "#{generate_error_payload(api_key)}\n"
 
+    if rand(0..20) == 0
+      payload = payload[0..rand(50..400)]
       file.write payload
+      file.close
+    else
+      file.write payload
+      file.flush
     end
 
     sleep rand(SLEEP_PERIOD)/1000.0
   end
+
+  file.close
 end
 
 if ARGV.length == 1
