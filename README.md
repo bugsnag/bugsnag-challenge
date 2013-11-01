@@ -41,6 +41,15 @@ Running buggy_app.rb
 -   The script will generate a file, `bugsnag.log`, containing error payloads
 
 
+Testing Your Script
+-------------------
+
+If your script is posting error payloads to bugsnag correctly, you'll see:
+
+-   A 200 response from notify.bugsnag.com
+-   Errors should appear on your Bugsnag dashboard
+
+
 Extensions
 ----------
 
