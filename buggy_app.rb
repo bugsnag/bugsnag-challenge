@@ -12,32 +12,32 @@ SLEEP_PERIOD = 1..2000
 
 def generate_error_payload(api_key)
   JSON.generate({
-    api_key: api_key,
-    notifier: {
-      name: "Bugsnag Ruby",
-      version: "0.0.1",
-      url: "https://github.com/bugsnag/bugsnag-challenge"
+    :api_key => api_key,
+    :notifier => {
+      :name => "Bugsnag Ruby",
+      :version => "0.0.1",
+      :url => "https://github.com/bugsnag/bugsnag-challenge"
     },
-    events: [{
-      userId: Faker::Internet.email,
-      appVersion: rand(1..100),
-      osVersion: rand(1..100),
-      releaseStage: "production",
-      context: Faker::Name.name,
-      metaData: {},
-      exceptions: [{
-        errorClass: Faker::Name.name,
-        message: Faker::Lorem.sentence,
-        stacktrace: [{
-          file: Faker::Lorem.word,
-          lineNumber: rand(1..200),
-          method: Faker::Lorem.word,
-          inProject: rand(1..2) == 2
+    :events => [{
+      :userId => Faker::Internet.email,
+      :appVersion => rand(1..100),
+      :osVersion => rand(1..100),
+      :releaseStage => "production",
+      :context => Faker::Name.name,
+      :metaData => {},
+      :exceptions => [{
+        :errorClass => Faker::Name.name,
+        :message => Faker::Lorem.sentence,
+        :stacktrace => [{
+          :file => Faker::Lorem.word,
+          :lineNumber => rand(1..200),
+          :method => Faker::Lorem.word,
+          :inProject => rand(1..2) == 2
         },{
-          file: Faker::Lorem.word,
-          lineNumber: rand(1..200),
-          method: Faker::Lorem.word,
-          inProject: rand(1..2) == 2
+          :file => Faker::Lorem.word,
+          :lineNumber => rand(1..200),
+          :method => Faker::Lorem.word,
+          :inProject => rand(1..2) == 2
         }]
       }]
     }]
