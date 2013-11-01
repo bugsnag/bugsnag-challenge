@@ -20,8 +20,8 @@ def generate_error_payload(api_key)
     },
     :events => [{
       :userId => Faker::Internet.email,
-      :appVersion => rand(1..100),
-      :osVersion => rand(1..100),
+      :appVersion => rand(1..100).to_s,
+      :osVersion => rand(1..100).to_s,
       :releaseStage => "production",
       :context => Faker::Name.name,
       :metaData => {},
