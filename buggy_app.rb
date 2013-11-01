@@ -48,7 +48,7 @@ def crash_repeatedly(api_key)
   while true do
     puts "#{Time.now.utc.iso8601(3)} - Writing error payload to #{LOG_FILE}"
 
-    file ||= File.open(LOG_FILE, "a")
+    file = File.open(LOG_FILE, "a") if !file || file.closed?
     payload = "#{generate_error_payload(api_key)}\n"
 
     if rand(0..20) == 0
