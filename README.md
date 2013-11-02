@@ -63,6 +63,4 @@ the script:
     See our Notifier API (https://bugsnag.com/docs/notifier-api) docs
     for more information.
 
--   Is it possible to have
-
 -   Consider how to recover if your script crashes.
